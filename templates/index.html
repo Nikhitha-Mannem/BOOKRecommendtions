@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books Recommendation</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Centering Content */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #f4f4f4;
+        }
+
+        /* Container Styling */
+        .container {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 350px;
+        }
+
+        /* Heading */
+        h1 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        /* Input Field */
+        input {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        /* Button */
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        /* Recommendations Display */
+        #booksDisplay {
+            margin-top: 15px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Book Recommendation System</h1>
+        <input type="text" id="bookname" placeholder="Enter Book Name" />
+        <button id="recommendBtn" onclick="getRecommendations()">Recommend</button>
+        <p id="booksDisplay"></p>
+    </div>
+    <script>
+        async function getRecommendations() {
+            let inputElement = document.getElementById('bookname'); // Get the input element
+            let inputed_book_name = inputElement.value;
+
+            if (inputed_book_name.trim() === "") {
+                alert("Please enter a book name."); // Prevent sending empty requests
+                return;
+            }
+
+            try {
+                let response = await fetch("http://127.0.0.1:5000/recommend", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ book_name: inputed_book_name })
+                });
+
+                let data = await response.json();
+                let result = document.getElementById('booksDisplay');
+
+                // Clear previous results
+                result.innerHTML = '';
+
+                if (Array.isArray(data.recommendations)) {
+                    // Create an unordered list
+                    let ul = document.createElement('ul');
+
+                    // Iterate over each recommendation and add it as a list item
+                    data.recommendations.forEach(book => {
+                        let li = document.createElement('li');
+                        li.textContent = book;
+                        ul.appendChild(li);
+                    });
+
+                    result.appendChild(ul); // Display the list of recommendations
+                    result.style.display = 'block';
+                } else {
+                    result.textContent = 'No recommendations found.';
+                    result.style.display = 'block';
+                }
+
+                inputElement.value = ''; // Properly clear the input field
+            } catch (error) {
+                console.error("Error fetching recommendations:", error);
+                alert("Failed to fetch recommendations. Please try again later.");
+            }
+        }
+
+
+    </script>
+
+</body>
+
+</html>
