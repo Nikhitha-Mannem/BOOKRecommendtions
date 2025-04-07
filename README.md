@@ -46,10 +46,9 @@ A full-stack **Book Recommendation System** built using **Flask (Backend)** and 
 ---
 
 ## 📥 Installation
-
-1. Clone the repository:
+ Clone the repository:
    ```bash
    git clone https://github.com/yourusername/book-recommendation-system.git
-cd book-recommendation-system
-pip install -r requirements.txt
-```
+   cd book-recommendation-system
+   pip install -r requirements.txt
+   ```
