@@ -31,6 +31,9 @@ A full-stack **Book Recommendation System** built using **Flask (Backend)** and 
 
 ### Libraries and Packages
 
+**ScreenShots**
+<img width="1445" alt="Screenshot 2025-04-07 at 6 55 47 PM" src="https://github.com/user-attachments/assets/4252f7fd-6497-4441-97ce-c3d816ca0dfc" />
+<img width="1445" alt="Screenshot 2025-04-07 at 6 59 27 PM" src="https://github.com/user-attachments/assets/1f573664-5d4d-450a-9a2e-68725d4f8704" />
 #### Frontend
 - **HTML/CSS**: Structuring and styling the web pages.
 - **Bootstrap**: Responsive design.
@@ -48,7 +51,7 @@ A full-stack **Book Recommendation System** built using **Flask (Backend)** and 
 ## 📥 Installation
  Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/book-recommendation-system.git
+   git clone https://github.com/nikhitha-mannem/bookrecommendations.git
    cd book-recommendation-system
    pip install -r requirements.txt
    ```
